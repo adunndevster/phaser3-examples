@@ -35,20 +35,17 @@ function create ()
             ball.setCircle();
             ball.setFriction(0.005).setBounce(1);
             ball.setSleepEvents(true, true);
+            console.log(ball);
         },
         callbackScope: this,
         repeat: 64
     });
 
-    this.matter.world.on('SLEEP_START_EVENT', function (event) {
-
-        event.body.gameObject.setTint(0xff0000);
-
+    this.matter.world.on('sleepstart', function (event, body) {
+        event.source.gameObject.setTint(0xff0000);
     });
 
-    this.matter.world.on('SLEEP_END_EVENT', function (event) {
-
-        event.body.gameObject.setTint(0xffffff);
-
+    this.matter.world.on('sleepend', function (event) {
+        event.source.gameObject.setTint(0xffffff);
     });
 }
